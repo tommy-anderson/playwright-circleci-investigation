@@ -1,0 +1,18 @@
+version: 2.1
+jobs:
+  test:
+    docker:
+      - image: cimg/node:lts-browsers
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - v1-deps-{{ checksum "package-lock.json" }}
+      - run: npm ci
+      - run: npx playwright install --with-deps
+      - run: npx playwright test
+      - store_artifacts:
+          path: playwright-report/
+          destination: playwright-report
+      - store_test_results:
+          path: test-results/
