@@ -36,11 +36,6 @@ jobs:
       - install-node-modules
       - playwright-install
       - run:
-          name: Get timings
-          command: |
-            TESTFILES=$(circleci tests glob "tests/**/*.ts")
-            echo "$TESTFILES"
-      - run:
           name: Run Playwright tests based on CircleCI timings
           command: |
             PLAYWRIGHT_JUNIT_OUTPUT_NAME=tests/playwright/results.xml

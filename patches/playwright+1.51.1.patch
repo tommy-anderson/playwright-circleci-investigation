@@ -1,0 +1,17 @@
+diff --git a/node_modules/playwright/lib/reporters/junit.js b/node_modules/playwright/lib/reporters/junit.js
+index c7debbc..a68e53a 100644
+--- a/node_modules/playwright/lib/reporters/junit.js
++++ b/node_modules/playwright/lib/reporters/junit.js
+@@ -105,10 +105,11 @@ class JUnitReporter {
+     this.totalTests += tests;
+     this.totalSkipped += skipped;
+     this.totalFailures += failures;
++    const name = suite.location.file.split(process.cwd())[1].slice(1);
+     const entry = {
+       name: 'testsuite',
+       attributes: {
+-        name: suite.title,
++        name,
+         timestamp: this.timestamp.toISOString(),
+         hostname: projectName,
+         tests,

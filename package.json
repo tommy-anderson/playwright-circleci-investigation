@@ -10,5 +10,9 @@
   "devDependencies": {
     "@playwright/test": "1.51.1",
     "@types/node": "22.13.13"
+  },
+  "postinstall": "patch-package",
+  "dependencies": {
+    "patch-package": "8.0.0"
   }
 }
