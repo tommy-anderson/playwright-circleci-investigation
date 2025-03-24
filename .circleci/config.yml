@@ -25,13 +25,16 @@ jobs:
   e2e-tests:
     docker:
       - image: cimg/node:lts-browsers
+    parallelism: 2
     steps:
       - checkout
       - install-node-modules
       - playwright-install
       - run:
           name: Run Playwright tests
-          command: npx playwright test
+          command: |
+            SHARD_INDEX=$((${CIRCLE_NODE_INDEX} + 1))
+            npx playwright test --shard=${SHARD_INDEX}/${CIRCLE_NODE_TOTAL}
       - store_artifacts:
           path: tests/playwright/report
           name: Store HTML test reports
