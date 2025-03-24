@@ -44,7 +44,7 @@ jobs:
           name: Run Playwright tests based on CircleCI timings
           command: |
             PLAYWRIGHT_JUNIT_OUTPUT_NAME=tests/playwright/results.xml
-            circleci tests glob "tests/**/*.ts | circleci tests run --command="xargs npx playwright test --config=playwright.config.ts" --verbose --split-by=timings --time-default=1s
+            circleci tests glob "tests/**/*.ts" | circleci tests run --command="xargs npx playwright test --config=playwright.config.ts" --verbose --split-by=timings --time-default=1s
       - store_artifacts:
           path: tests/playwright/report
           name: Store HTML test reports
