@@ -28,7 +28,7 @@ commands:
           command: npx playwright install --with-deps
 
 jobs:
-  e2e-tests:
+  circleci-pw-tests:
     executor: medium-node-executor
     parallelism: 2
     steps:
@@ -36,7 +36,26 @@ jobs:
       - install-node-modules
       - playwright-install
       - run:
-          name: Run Playwright tests
+          name: Run Playwright tests based on CircleCI timings
+          command: |
+            PLAYWRIGHT_JUNIT_OUTPUT_NAME=tests/playwright/results.xml
+            TESTFILES=$(circleci tests glob "tests/**/*.spec.ts")
+            circleci tests run --command="xargs npx playwright test --config=playwright.config.ts" --verbose --split-by=timings --time-default=1s
+      - store_artifacts:
+          path: tests/playwright/report
+          name: Store HTML test reports
+      - store_test_results:
+          name: Store XML test reports
+          path: tests/playwright/results.xml
+  default-pw-tests:
+    executor: medium-node-executor
+    parallelism: 2
+    steps:
+      - checkout
+      - install-node-modules
+      - playwright-install
+      - run:
+          name: Run Playwright tests based on PW timings
           command: |
             SHARD_INDEX=$((${CIRCLE_NODE_INDEX} + 1))
             npx playwright test --shard=${SHARD_INDEX}/${CIRCLE_NODE_TOTAL}
@@ -45,9 +64,10 @@ jobs:
           name: Store HTML test reports
       - store_test_results:
           name: Store XML test reports
-          path: tests/playwright/results
+          path: tests/playwright/results.xml
 
 workflows:
-  build-test:
+  run-tests:
     jobs:
-      - e2e-tests
+      - circleci-pw-tests
+      - default-pw-tests
