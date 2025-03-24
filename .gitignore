@@ -1,7 +1,7 @@
 node_modules
 
 # Playwright
-tests/playwright/results
+tests/playwright/results.xml
 tests/playwright/report/*
 blob-report
 .last-run.json
