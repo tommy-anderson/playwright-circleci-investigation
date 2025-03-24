@@ -40,7 +40,8 @@ jobs:
           command: |
             PLAYWRIGHT_JUNIT_OUTPUT_NAME=tests/playwright/results.xml
             TESTFILES=$(circleci tests glob "tests/**/*.spec.ts")
-            circleci tests run --command="xargs npx playwright test --config=playwright.config.ts" --verbose --split-by=timings --time-default=1s
+            echo "$TESTFILES"
+            echo "$TESTFILES" | circleci tests run --command="xargs npx playwright test --config=playwright.config.ts" --verbose --split-by=timings --time-default=1s
       - store_artifacts:
           path: tests/playwright/report
           name: Store HTML test reports
