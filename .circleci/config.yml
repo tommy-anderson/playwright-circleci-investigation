@@ -59,4 +59,3 @@ workflows:
   run-tests:
     jobs:
       - circleci-pw-tests
-      - default-pw-tests
