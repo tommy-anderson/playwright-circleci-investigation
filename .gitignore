@@ -6,3 +6,4 @@ tests/playwright/report/*
 blob-report
 .last-run.json
 /playwright/.cache/
+test
