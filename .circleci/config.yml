@@ -14,13 +14,14 @@ commands:
           command: find patches/ -type f -print0 | sort -z | xargs -0 sha256sum | sha256sum > patches-hash
       - restore_cache:
           keys:
-            - v1-node_modules-{{ checksum "package-lock.json" }}-{{ checksum "patches-hash" }}
+            - v2-node_modules-{{ checksum "package-lock.json" }}-{{ checksum "patches-hash" }}
       - run: |
           if [ ! -d node_modules ]; then
             npm ci
+            npx patch-package
           fi
       - save_cache:
-          key: v1-node_modules-{{ checksum "package-lock.json" }}-{{ checksum "patches-hash" }}
+          key: v2-node_modules-{{ checksum "package-lock.json" }}-{{ checksum "patches-hash" }}
           paths:
             - node_modules
 
