@@ -43,7 +43,7 @@ jobs:
       - playwright-install
       - run:
           name: Fix CircleCI test timings
-          command: node test.js "$CIRCLE_INTERNAL_TASK_DATA/circle-test-results/results.json"
+          command: node test.js "$CIRCLE_INTERNAL_TASK_DATA/circle-test-results/results.json" "tests/"
       - run:
           name: Run Playwright tests based on CircleCI timings
           command: |
