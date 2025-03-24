@@ -18,8 +18,10 @@ commands:
       - run: |
           if [ ! -d node_modules ]; then
             npm ci
-            npx patch-package
           fi
+      - run:
+          name: Apply patches
+          command: npx patch-package
       - save_cache:
           key: v3-node_modules-{{ checksum "package-lock.json" }}-{{ checksum "patches-hash" }}
           paths:
