@@ -1,5 +1,11 @@
 version: 2.1
 
+executors:
+  medium-node-executor:
+    docker:
+      - image: cimg/node:lts
+    resource_class: medium
+
 commands:
   install-node-modules:
     steps:
@@ -23,8 +29,7 @@ commands:
 
 jobs:
   e2e-tests:
-    docker:
-      - image: cimg/node:lts-browsers
+    executor: medium-node-executor
     parallelism: 2
     steps:
       - checkout
