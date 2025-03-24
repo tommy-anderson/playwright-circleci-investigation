@@ -21,7 +21,7 @@ test.describe("specC", () => {
     await page.waitForTimeout(5000);
     await expect(page).toHaveTitle(/Playwright/);
   });
-  test("test4. Wait 5 seconds", async ({ page }) => {
+  test("test5. Wait 5 seconds", async ({ page }) => {
     await page.goto("https://playwright.dev/");
     await page.waitForTimeout(5000);
     await expect(page).toHaveTitle(/Playwright/);
