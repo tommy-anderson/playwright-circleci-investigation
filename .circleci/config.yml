@@ -61,8 +61,11 @@ jobs:
       - store_artifacts:
           path: tests/playwright/report
           name: Store HTML test reports
+      - store_artifacts:
+          path: tests/playwright/results.xml
+          name: Store JUNIT test reports
       - store_test_results:
-          name: Store XML test reports
+          name: Send JUnit test results to CircleCI
           path: tests/playwright/results.xml
 
 workflows:
