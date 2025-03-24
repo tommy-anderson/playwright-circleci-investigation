@@ -9,10 +9,8 @@
   "license": "ISC",
   "devDependencies": {
     "@playwright/test": "1.51.1",
-    "@types/node": "22.13.13"
-  },
-  "postinstall": "patch-package",
-  "dependencies": {
+    "@types/node": "22.13.13",
     "patch-package": "8.0.0"
-  }
+  },
+  "postinstall": "patch-package"
 }
