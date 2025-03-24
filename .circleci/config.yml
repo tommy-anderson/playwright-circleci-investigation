@@ -33,10 +33,11 @@ jobs:
           name: Run Playwright tests
           command: npx playwright test
       - store_artifacts:
-          path: playwright-report/
-          destination: playwright-report
+          path: tests/playwright/report
+          name: Store HTML test reports
       - store_test_results:
-          path: test-results/
+          name: Store XML test reports
+          path: tests/playwright/results
 
 workflows:
   build-test:
